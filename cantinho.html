@@ -11,7 +11,6 @@
       font-family: "Poppins", sans-serif;
       color: white;
       overflow: hidden;
-      text-align: center;
     }
 
     .chat-container {
@@ -22,7 +21,7 @@
       padding: 20px;
       box-shadow: 0 0 25px #a64dff;
       overflow-y: auto;
-      height: 70vh;
+      height: 60vh;
     }
 
     .message {
@@ -58,7 +57,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Corações */
+    /* Corações caindo */
     .heart {
       position: fixed;
       top: -10px;
@@ -81,27 +80,37 @@
       margin-top: 20px;
     }
 
-    audio {
-      display: none;
-    }
-
-    /* Botão do mini jogo */
-    .next-btn {
-      background: linear-gradient(45deg, #a64dff, #d1a8ff);
-      color: white;
-      border: none;
-      padding: 15px 35px;
-      font-size: 1.2rem;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 0 15px #b36cff;
-      transition: 0.3s;
+    /* Botão de beijo */
+    .kiss-container {
+      text-align: center;
       margin-top: 20px;
     }
 
-    .next-btn:hover {
+    .kiss-btn {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 25px;
+      border: none;
+      background: linear-gradient(45deg, #a64dff, #d1a8ff);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 15px #b36cff;
+      transition: 0.3s;
+    }
+
+    .kiss-btn:hover {
       transform: scale(1.1);
       box-shadow: 0 0 25px #d1a8ff;
+    }
+
+    #kissCount {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #f0e6ff;
+    }
+
+    audio {
+      display: none;
     }
   </style>
 </head>
@@ -115,16 +124,19 @@
     </div>
   </div>
 
-  <!-- Botão do Mini Jogo -->
-  <button class="next-btn" onclick="window.location.href='mini-jogo.html'">
-    Jogar Nosso Quiz 💜
-  </button>
+  <!-- Botão de beijo -->
+  <div class="kiss-container">
+    <button class="kiss-btn" id="kissBtn">Dar Beijo 💋</button>
+    <p id="kissCount">Beijos enviados: 0</p>
+  </div>
 
+  <!-- Música de fundo -->
   <audio autoplay loop>
     <source src="musica-romantica.mp3" type="audio/mpeg">
   </audio>
 
   <script>
+    // Conversa automática
     const mensagens = [
       { tipo: "sent", texto: "Oi amor 💜" },
       { tipo: "received", texto: "Oi vida 😍 tava pensando em você" },
@@ -133,12 +145,8 @@
       { tipo: "sent", texto: "Eu amo cada segundo ao seu lado 💫" },
       { tipo: "received", texto: "Eu também... você é o melhor presente que eu já ganhei 💜" },
       { tipo: "sent", texto: "Promete ficar comigo pra sempre?" },
-      { tipo: "received", texto: "Prometo 💍 pra sempre e além 💫" },
-      { tipo: "sent", texto: "Hoje à noite vamos assistir nosso filme favorito juntos 🍿" },
-      { tipo: "received", texto: "Ai que lindo 😍 já tô ansiosa!" },
-      { tipo: "sent", texto: "Te amo demais 💜" },
-      { tipo: "received", texto: "Eu também 💖 você é meu tudo!" }
-      // Podemos adicionar mais mensagens para durar alguns minutos
+      { tipo: "received", texto: "Prometo 💍 pra sempre e além 💫" }
+      // Você pode adicionar mais mensagens para durar mais tempo
     ];
 
     const chat = document.getElementById("chat");
@@ -153,11 +161,58 @@
         chat.appendChild(div);
         chat.scrollTop = chat.scrollHeight;
         index++;
-        setTimeout(mostrarMensagem, 2500);
+        setTimeout(mostrarMensagem, 2500); // intervalo entre mensagens
       }
     }
 
     mostrarMensagem();
+
+    // Botão de beijo
+    let count = 0;
+    const kissBtn = document.getElementById('kissBtn');
+    const kissCount = document.getElementById('kissCount');
+
+    kissBtn.addEventListener('click', () => {
+      count++;
+      kissCount.textContent = `Beijos enviados: ${count}`;
+
+      // Animação de coração
+      const heart = document.createElement('div');
+      heart.textContent = '💜';
+      heart.style.position = 'fixed';
+      heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      heart.style.zIndex = 1000;
+      document.body.appendChild(heart);
+
+      let pos = window.innerHeight;
+      const anim = setInterval(() => {
+        pos -= 5;
+        heart.style.top = pos + 'px';
+        if(pos < -50){
+          clearInterval(anim);
+          heart.remove();
+        }
+      }, 10);
+
+      // Pop-up fofo
+      const popup = document.createElement('div');
+      popup.textContent = 'Beijo enviado 💋';
+      popup.style.position = 'fixed';
+      popup.style.top = '20%';
+      popup.style.left = '50%';
+      popup.style.transform = 'translateX(-50%)';
+      popup.style.background = '#d1a8ff';
+      popup.style.color = '#000';
+      popup.style.padding = '15px 25px';
+      popup.style.borderRadius = '20px';
+      popup.style.boxShadow = '0 0 15px #b36cff';
+      popup.style.zIndex = 1001;
+      document.body.appendChild(popup);
+
+      setTimeout(() => popup.remove(), 2000);
+    });
 
     // Corações caindo
     function createHeart() {
@@ -167,10 +222,10 @@
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.fontSize = Math.random() * 25 + 15 + "px";
       heart.style.animationDuration = (Math.random() * 4 + 3) + "s";
+      heart.style.opacity = Math.random() * 0.5 + 0.5;
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 7000);
     }
-
     setInterval(createHeart, 300);
   </script>
 
