@@ -1,111 +1,328 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Nosso Futuro 💜</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nossa Cronologia 💜</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      background: #000;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
+    :root{
+      --bg:#000;
+      --accent1:#b388ff;
+      --accent2:#d3a3ff;
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      background: radial-gradient(circle at 10% 10%, #0b0013 0%, #000 40%);
+      color:#f3eaff;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
     }
 
-    h1 {
-      color: #c299ff;
-      text-shadow: 0 0 15px #b266ff, 0 0 30px #9f44ff;
-      font-size: 2.3rem;
-      margin-bottom: 40px;
-      animation: fadeIn 2s ease-in-out;
+    /* header */
+    header{
+      text-align:center;
+      padding:48px 20px 10px;
+      position:relative;
+      z-index:2;
+    }
+    header h1{
+      margin:0;
+      font-size:2.2rem;
+      color:var(--accent2);
+      text-shadow:0 0 18px rgba(179,108,255,0.18);
+    }
+    header p{
+      margin:10px 0 0;
+      color:#d9cfff;
+      opacity:0.95;
     }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
+    /* timeline container */
+    .timeline-wrap{
+      width:100%;
+      max-width:1000px;
+      margin:36px auto 80px;
+      padding:20px;
+      position:relative;
+      z-index:2;
     }
 
-    .btn {
-      background: linear-gradient(45deg, #a866ff, #d8b4ff);
-      color: #fff;
-      padding: 14px 35px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 0 20px #b266ff;
-      transition: 0.3s;
+    /* center vertical line */
+    .timeline-line{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      width:6px;
+      height:100%;
+      background: linear-gradient(180deg,var(--accent1),var(--accent2));
+      border-radius:6px;
+      box-shadow:0 0 20px rgba(166,77,255,0.15);
+      z-index:1;
     }
 
-    .btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 35px #d8b4ff;
+    /* items */
+    .item{
+      position:relative;
+      width:calc(50% - 40px);
+      padding:18px;
+      margin:30px 20px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(180,120,255,0.12);
+      box-shadow: 0 6px 22px rgba(22, 6, 38, 0.6);
+      backdrop-filter: blur(4px);
+      z-index:2;
+      transition: transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .25s;
+      cursor:pointer;
+      opacity:0;
+      transform: translateY(20px) scale(.98);
     }
 
-    .soon {
-      font-size: 1.1rem;
-      color: #8e8e8e;
-      font-style: italic;
-      margin: 5px 0;
-      text-shadow: 0 0 8px #551a8b;
+    .item:hover{
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 18px 40px rgba(166,77,255,0.12);
     }
 
-    /* Corações roxos caindo */
-    .heart {
-      position: fixed;
-      top: -10px;
-      color: #c299ff;
-      animation: fall linear forwards;
-      opacity: 0.8;
-      z-index: 0;
+    .item.show{
+      opacity:1;
+      transform: translateY(0) scale(1);
     }
 
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    /* left / right */
+    .item.left{
+      margin-left:0;
+      margin-right:auto;
+      transform-origin: right center;
+    }
+    .item.right{
+      margin-left:auto;
+      margin-right:0;
+      transform-origin: left center;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* date badge and dot */
+    .date{
+      display:inline-block;
+      font-weight:600;
+      color:var(--accent2);
+      margin-bottom:8px;
     }
+    .dot{
+      position:absolute;
+      top:24px;
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background: linear-gradient(180deg,var(--accent2),var(--accent1));
+      box-shadow:0 0 18px rgba(166,77,255,0.25);
+      left:calc(50% - 10px);
+      transform:translateX(-50%);
+      z-index:3;
+    }
+
+    /* content inside item */
+    .item h3{
+      margin:6px 0 8px;
+      font-size:1.25rem;
+      color:#f9f3ff;
+    }
+    .item p{
+      margin:0;
+      color:#eaddff;
+      opacity:0.95;
+      line-height:1.5;
+      font-size:0.98rem;
+    }
+    .item .meta{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .chip{
+      padding:6px 10px;
+      background:var(--glass);
+      border-radius:999px;
+      color:#e6dbff;
+      font-size:0.85rem;
+      border:1px solid rgba(180,120,255,0.08);
+    }
+
+    /* mobile */
+    @media (max-width:840px){
+      .timeline-line{ left:20px; transform:none; width:4px; }
+      .item{ width:calc(100% - 90px); margin:18px 0 18px 60px; }
+      .item.left, .item.right { margin:18px 0 18px 60px; }
+      .dot{ left:20px; transform:none; }
+    }
+
+    /* small footer/button group */
+    .controls{
+      text-align:center;
+      margin:0 auto 80px;
+      z-index:2;
+    }
+    .controls .cta{
+      display:inline-block;
+      padding:12px 26px;
+      background:linear-gradient(45deg,var(--accent1),var(--accent2));
+      color:#fff;
+      border-radius:999px;
+      border:none;
+      box-shadow:0 0 26px rgba(166,77,255,0.15);
+      cursor:pointer;
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    /* cute floating hearts (behind) */
+    .floating-heart{
+      position:fixed;
+      top:-20px;
+      font-size:20px;
+      color:#d9bfff;
+      opacity:.8;
+      z-index:0;
+      animation:fall linear forwards;
+    }
+    @keyframes fall{
+      0% { transform:translateY(0) rotate(0); opacity:1 }
+      100% { transform:translateY(110vh) rotate(360deg); opacity:0 }
+    }
+
+    /* small hint */
+    .hint{ font-size:0.9rem; color:#cdb8ff; margin-top:10px; opacity:0.9; }
+
   </style>
 </head>
 <body>
 
-  <h1>💜 Nosso Futuro 💫</h1>
+  <header>
+    <h1>💜 Nossa Cronologia</h1>
+    <p>Clique em um momento para reviver — e se algo ainda não existir, aparece "Em breve".</p>
+  </header>
 
-  <div class="container">
-    <button class="btn" onclick="window.location.href='encontro.html'">💞 Primeiro Encontro</button>
-    <button class="btn" onclick="window.location.href='jantar.html'">🍝 Nosso Primeiro Jantar</button>
-    <button class="btn" onclick="window.location.href='presente.html'">🎁 Primeiro Presente</button>
-    <button class="btn" onclick="window.location.href='filme.html'">🎬 Nosso Primeiro Filme Juntos</button>
-    <div class="soon">✈️ Nossa Primeira Viagem — Em breve...</div>
-    <div class="soon">💍 O Dia do Pedido — Em breve...</div>
+  <main class="timeline-wrap" id="timelineWrap">
+    <div class="timeline-line" aria-hidden="true"></div>
+
+    <!-- item 1 (left) -->
+    <article class="item left" data-link="encontro.html" role="button" tabindex="0">
+      <div class="date">08/05/2025</div>
+      <h3>💞 Primeiro Encontro</h3>
+      <p>O dia que tudo começou: sorrisos tímidos, borboletas e o primeiro abraço que nunca mais saiu da memória.</p>
+      <div class="meta">
+        <span class="chip">Memória</span>
+        <span class="chip">Já liberado</span>
+      </div>
+    </article>
+
+    <!-- item 2 (right) -->
+    <article class="item right" data-link="jantar.html" role="button" tabindex="0">
+      <div class="date">15/06/2025</div>
+      <h3>🍝 Nosso Primeiro Jantar</h3>
+      <p>Velas, música e aquela sensação de que o mundo parou só pra nós dois — o primeiro jantar inesquecível.</p>
+      <div class="meta">
+        <span class="chip">Memória</span>
+        <span class="chip">Já liberado</span>
+      </div>
+    </article>
+
+    <!-- item 3 (left) -->
+    <article class="item left" data-link="presente.html" role="button" tabindex="0">
+      <div class="date">20/07/2025</div>
+      <h3>🎁 Primeiro Presente</h3>
+      <p>Mais que um embrulho — o gesto que mostrou cuidado, atenção e um tanto de poesia em forma de presente.</p>
+      <div class="meta">
+        <span class="chip">Memória</span>
+        <span class="chip">Já liberado</span>
+      </div>
+    </article>
+
+    <!-- item 4 (right) -->
+    <article class="item right" data-link="filme.html" role="button" tabindex="0">
+      <div class="date">02/08/2025</div>
+      <h3>🎬 Primeiro Filme Juntos</h3>
+      <p>O sofá, o cobertor e aquele silêncio confortável — o filme que virou lembrança eterna por causa de quem estava ao lado.</p>
+      <div class="meta">
+        <span class="chip">Memória</span>
+        <span class="chip">Já liberado</span>
+      </div>
+    </article>
+
+    <!-- item 5 (left) - coming soon -->
+    <article class="item left" data-link="#" role="button" tabindex="0" aria-disabled="true">
+      <div class="date">—</div>
+      <h3>✈️ Primeira Viagem</h3>
+      <p style="opacity:.8">Em breve... vamos guardar fotos, mapas e memórias de onde o vento nos levar.</p>
+      <div class="meta">
+        <span class="chip">Em breve</span>
+      </div>
+    </article>
+
+    <!-- item 6 (right) - coming soon -->
+    <article class="item right" data-link="#" role="button" tabindex="0" aria-disabled="true">
+      <div class="date">—</div>
+      <h3>💍 O Dia do Pedido</h3>
+      <p style="opacity:.8">Em breve... o momento de transformar promessas em planos e planos em futuro.</p>
+      <div class="meta">
+        <span class="chip">Em breve</span>
+      </div>
+    </article>
+
+  </main>
+
+  <div class="controls">
+    <a class="cta" href="pedido.html">Entrar no Nosso Cantinho 💫</a>
+    <div class="hint">Dica: use TAB/ENTER para navegar pelos cards (acessível)</div>
   </div>
 
   <script>
-    // corações roxos caindo
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.textContent = '💜';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
+    // reveal items on scroll / show with delay for cute effect
+    const items = Array.from(document.querySelectorAll('.item'));
+    function reveal(){
+      const top = window.scrollY + window.innerHeight;
+      items.forEach((it, i)=>{
+        const rect = it.getBoundingClientRect();
+        const elTop = rect.top + window.scrollY;
+        if(top > elTop + 50){
+          setTimeout(()=> it.classList.add('show'), i*80);
+        }
+      });
     }
-    setInterval(createHeart, 400);
-  </script>
+    reveal();
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('resize', reveal);
 
+    // interaction: click / keyboard opens link (if exists)
+    items.forEach(it=>{
+      const link = it.dataset.link;
+      it.addEventListener('click', ()=>{ if(link && link!=='#') window.location.href = link; });
+      it.addEventListener('keydown', (e)=>{ if((e.key==='Enter'||e.key===' ') && link && link!=='#') window.location.href = link; });
+    });
+
+    // floating hearts (background)
+    function createHeart() {
+      const h = document.createElement('div');
+      h.className = 'floating-heart';
+      h.textContent = '💜';
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.fontSize = (Math.random()*28 + 14) + 'px';
+      h.style.animationDuration = (Math.random()*5 + 4) + 's';
+      h.style.opacity = (Math.random()*0.6 + 0.4);
+      document.body.appendChild(h);
+      setTimeout(()=> h.remove(), 7000);
+    }
+    setInterval(createHeart, 350);
+
+    // small accessibility: focus visible style
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='Tab') document.body.classList.add('show-focus');
+    });
+  </script>
 </body>
 </html>
