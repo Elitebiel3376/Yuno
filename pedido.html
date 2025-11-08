@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Amor 💜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Corações */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #c69af7;
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #d1a8ff;
+      text-shadow: 0 0 15px #b36cff, 0 0 30px #a64dff;
+      margin-bottom: 10px;
+    }
+
+    .title2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-top: 30px;
+      color: #b77fff;
+      text-shadow: 0 0 20px #a64dff;
+    }
+
+    #timer {
+      font-size: 1.6rem;
+      color: #e0c8ff;
+      margin-bottom: 40px;
+      margin-top: 10px;
+    }
+
+    /* Carrossel */
+    .carousel {
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      margin: 0 auto 50px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #a64dff;
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+      border-radius: 15px;
+    }
+
+    .carousel img.active {
+      display: block;
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Texto romântico */
+    .love-text {
+      max-width: 800px;
+      margin: 60px auto;
+      font-size: 1.3rem;
+      line-height: 1.8;
+      color: #f0e6ff;
+      text-shadow: 0 0 10px #a64dff;
+    }
+
+    /* Player */
+    .music-player {
+      background: #000;
+      border: 2px solid #b77fff;
+      border-radius: 20px;
+      padding: 20px;
+      width: 300px;
+      margin: 30px auto;
+      box-shadow: 0 0 25px #b77fff;
+    }
+
+    audio {
+      width: 100%;
+      outline: none;
+      filter: drop-shadow(0 0 5px #a64dff);
+    }
+
+    /* Botão */
+    .next-btn {
+      background: linear-gradient(45deg, #a64dff, #d1a8ff);
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #b36cff;
+      transition: 0.3s;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #d1a8ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Nosso Amor 💜</h1>
+    <div class="title2">ESTAMOS JUNTOS</div>
+    <p id="timer"></p>
+
+    <!-- Carrossel -->
+    <div class="carousel">
+      <img src="foto1.jpg" class="active">
+      <img src="foto2.jpg">
+      <img src="foto3.jpg">
+      <img src="foto4.jpg">
+      <img src="foto5.jpg">
+      <img src="foto6.jpg">
+      <img src="foto7.jpg">
+    </div>
+
+    <!-- Texto -->
+    <div class="love-text">
+      Desde o dia em que nossos caminhos se cruzaram, tudo ganhou um novo brilho. 💜  
+      Cada segundo ao seu lado é uma lembrança que quero guardar pra sempre.  
+      Nosso amor é feito de sorrisos, de olhares que falam sem palavras,  
+      de abraços que curam, e de momentos simples que se tornam eternos.  
+      Não importa o tempo, o lugar ou a distância — o que a gente tem é real.  
+      Que venham mais dias, meses e anos, porque eu quero viver todos eles com você.  
+      Você é o meu lar, o meu porto seguro, o meu amor. 💫
+    </div>
+
+    <!-- Player -->
+    <div class="music-player">
+      <audio controls autoplay loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+    </div>
+
+    <button class="next-btn" onclick="window.location.href='futuro.html'">Nosso Futuro 💜</button>
+  </div>
+
+  <script>
+    // Contador
+    const startDate = new Date("2025-05-08T00:00:00");
+    const timerElement = document.getElementById("timer");
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+      const months = Math.floor((diff / (1000 * 60 * 60 * 24 * 30)) % 12);
+      const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30);
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      timerElement.textContent = `${years} ano(s), ${months} mês(es), ${days} dia(s), ${hours}h ${minutes}m ${seconds}s 💜`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Carrossel
+    const images = document.querySelectorAll(".carousel img");
+    let index = 0;
+    setInterval(() => {
+      images[index].classList.remove("active");
+      index = (index + 1) % images.length;
+      images[index].classList.add("active");
+    }, 3000);
+
+    // Corações caindo
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💜";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 25 + 15 + "px";
+      heart.style.animationDuration = (Math.random() * 4 + 3) + "s";
+      heart.style.opacity = Math.random() * 0.5 + 0.5;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>

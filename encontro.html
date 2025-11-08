@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Primeiro Encontro 💜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #c69af7;
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 1;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #d1a8ff;
+      text-shadow: 0 0 15px #b36cff, 0 0 30px #a64dff;
+      margin-bottom: 30px;
+    }
+
+    .photo {
+      width: 80%;
+      max-width: 450px;
+      border-radius: 20px;
+      border: 3px solid #b36cff;
+      box-shadow: 0 0 25px #a64dff;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .text {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.3rem;
+      line-height: 1.8;
+      color: #f0e6ff;
+      text-shadow: 0 0 10px #a64dff;
+      padding: 0 15px;
+    }
+
+    .back-btn {
+      margin-top: 40px;
+      background: linear-gradient(45deg, #a64dff, #d1a8ff);
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #b36cff;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #d1a8ff;
+    }
+
+    audio {
+      margin-top: 30px;
+      width: 300px;
+      border-radius: 10px;
+      outline: none;
+      filter: drop-shadow(0 0 10px #a64dff);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Nosso Primeiro Encontro 💜</h1>
+
+    <img src="encontro.jpg" alt="Nosso Primeiro Encontro" class="photo">
+
+    <div class="text">
+      Aquele dia ficou pra sempre na memória... 💫  
+      O frio na barriga, o sorriso tímido, o olhar que dizia tudo sem precisar de palavras.  
+      Foi ali que tudo começou, e desde então, cada momento contigo tem sido um novo capítulo da nossa história.  
+      O toque das suas mãos, o brilho dos seus olhos e o jeito como o tempo parou quando te vi...  
+      Eu nunca mais fui o mesmo desde aquele dia. 💜  
+      Nosso primeiro encontro não foi só o começo — foi o início de um amor que vai durar pra sempre.
+    </div>
+
+    <audio controls autoplay loop>
+      <source src="musica2.mp3" type="audio/mp3">
+      Seu navegador não suporta áudio.
+    </audio>
+
+    <br>
+    <button class="back-btn" onclick="window.location.href='futuro.html'">⬅️ Voltar às Memórias</button>
+  </div>
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💜";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 25 + 15 + "px";
+      heart.style.animationDuration = (Math.random() * 4 + 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>

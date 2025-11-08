@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Cantinho 💜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #d1a8ff;
+      text-shadow: 0 0 10px #b36cff, 0 0 20px #a64dff;
+      animation: fadeIn 2s ease-in-out;
+      margin-bottom: 30px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      padding: 15px 40px;
+      font-size: 1.3rem;
+      color: white;
+      background: linear-gradient(45deg, #a64dff, #d1a8ff);
+      border: none;
+      border-radius: 35px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #a64dff;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px #d1a8ff;
+    }
+
+    /* Corações caindo */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #d1a8ff;
+      animation: fall linear forwards;
+      z-index: 1;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bem-vinda ao nosso cantinho 💜</h1>
+  <button class="btn" onclick="window.location.href='pedido.html'">Entrar 💫</button>
+
+  <script>
+    // Corações roxinhos caindo
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💜';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>

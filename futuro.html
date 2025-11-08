@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Futuro 💜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #c299ff;
+      text-shadow: 0 0 15px #b266ff, 0 0 30px #9f44ff;
+      font-size: 2.3rem;
+      margin-bottom: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #a866ff, #d8b4ff);
+      color: #fff;
+      padding: 14px 35px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #b266ff;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 35px #d8b4ff;
+    }
+
+    .soon {
+      font-size: 1.1rem;
+      color: #8e8e8e;
+      font-style: italic;
+      margin: 5px 0;
+      text-shadow: 0 0 8px #551a8b;
+    }
+
+    /* Corações roxos caindo */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #c299ff;
+      animation: fall linear forwards;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💜 Nosso Futuro 💫</h1>
+
+  <div class="container">
+    <button class="btn" onclick="window.location.href='encontro.html'">💞 Primeiro Encontro</button>
+    <button class="btn" onclick="window.location.href='jantar.html'">🍝 Nosso Primeiro Jantar</button>
+    <button class="btn" onclick="window.location.href='presente.html'">🎁 Primeiro Presente</button>
+    <button class="btn" onclick="window.location.href='filme.html'">🎬 Nosso Primeiro Filme Juntos</button>
+    <div class="soon">✈️ Nossa Primeira Viagem — Em breve...</div>
+    <div class="soon">💍 O Dia do Pedido — Em breve...</div>
+  </div>
+
+  <script>
+    // corações roxos caindo
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💜';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🎁 Nosso Primeiro Presente 💜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #d8b4ff;
+      text-shadow: 0 0 20px #a64dff, 0 0 40px #c299ff;
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .photo-container {
+      margin: 40px auto;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 25px #b266ff;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .photo-container img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    .text {
+      max-width: 700px;
+      margin: 40px auto;
+      font-size: 1.2rem;
+      line-height: 1.9;
+      color: #f3e6ff;
+      text-shadow: 0 0 15px #a64dff;
+      padding: 0 20px;
+    }
+
+    .back-btn {
+      background: linear-gradient(45deg, #a64dff, #d1a8ff);
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #b36cff;
+      transition: 0.3s;
+      margin-bottom: 40px;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #d1a8ff;
+    }
+
+    /* Animações */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corações roxos */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #c299ff;
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 0;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎁 Nosso Primeiro Presente 💜</h1>
+
+  <div class="photo-container">
+    <img src="presente.jpg" alt="Nosso primeiro presente">
+  </div>
+
+  <div class="text">
+    Foi mais que um presente — foi um gesto cheio de carinho, um pedacinho de você que carrego comigo até hoje.  
+    Aquele momento ficou guardado, não pelo que estava dentro do embrulho, mas pelo que veio junto: o seu amor, o seu sorriso e a sua forma de me olhar.  
+    Desde então, percebi que o melhor presente que já recebi foi ter você na minha vida. 💜  
+  </div>
+
+  <button class="back-btn" onclick="window.location.href='futuro.html'">⬅️ Voltar</button>
+
+  <script>
+    // corações roxos caindo
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💜';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 25 + 15 + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>
