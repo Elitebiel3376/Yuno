@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Chat 💜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0b0014;
+      font-family: "Poppins", sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: rgba(50, 0, 80, 0.5);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 25px #a64dff;
+      overflow-y: auto;
+      height: 70vh;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      margin: 10px;
+      animation: fadeIn 0.8s ease;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .sent {
+      background: #a64dff;
+      align-self: flex-end;
+      margin-left: auto;
+      border-bottom-right-radius: 0;
+    }
+
+    .received {
+      background: #4b0082;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+
+    .chat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corações */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #b784f7;
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 1;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    h1 {
+      text-align: center;
+      color: #d1a8ff;
+      text-shadow: 0 0 10px #b36cff;
+      margin-top: 20px;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Nossa Conversa 💜</h1>
+
+  <div class="chat-container">
+    <div class="chat" id="chat">
+      <!-- As mensagens vão aparecer aqui -->
+    </div>
+  </div>
+
+  <audio autoplay loop>
+    <source src="musica-romantica.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const mensagens = [
+      { tipo: "sent", texto: "Oi amor 💜" },
+      { tipo: "received", texto: "Oi vida 😍 tava pensando em você" },
+      { tipo: "sent", texto: "Sabia que hoje faz 3 meses que a gente começou a namorar?" },
+      { tipo: "received", texto: "Sério? Já?? Passou tão rápido 😭" },
+      { tipo: "sent", texto: "Eu amo cada segundo ao seu lado 💫" },
+      { tipo: "received", texto: "Eu também... você é o melhor presente que eu já ganhei 💜" },
+      { tipo: "sent", texto: "Promete ficar comigo pra sempre?" },
+      { tipo: "received", texto: "Prometo 💍 pra sempre e além 💫" }
+    ];
+
+    const chat = document.getElementById("chat");
+    let index = 0;
+
+    function mostrarMensagem() {
+      if (index < mensagens.length) {
+        const msg = mensagens[index];
+        const div = document.createElement("div");
+        div.classList.add("message", msg.tipo);
+        div.textContent = msg.texto;
+        chat.appendChild(div);
+        chat.scrollTop = chat.scrollHeight;
+        index++;
+        setTimeout(mostrarMensagem, 2500);
+      }
+    }
+
+    mostrarMensagem();
+
+    // Corações caindo
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💜";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 25 + 15 + "px";
+      heart.style.animationDuration = (Math.random() * 4 + 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
