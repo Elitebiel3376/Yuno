@@ -11,6 +11,7 @@
       font-family: "Poppins", sans-serif;
       color: white;
       overflow: hidden;
+      text-align: center;
     }
 
     .chat-container {
@@ -83,6 +84,25 @@
     audio {
       display: none;
     }
+
+    /* Botão do mini jogo */
+    .next-btn {
+      background: linear-gradient(45deg, #a64dff, #d1a8ff);
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #b36cff;
+      transition: 0.3s;
+      margin-top: 20px;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #d1a8ff;
+    }
   </style>
 </head>
 <body>
@@ -95,6 +115,11 @@
     </div>
   </div>
 
+  <!-- Botão do Mini Jogo -->
+  <button class="next-btn" onclick="window.location.href='mini-jogo.html'">
+    Jogar Nosso Quiz 💜
+  </button>
+
   <audio autoplay loop>
     <source src="musica-romantica.mp3" type="audio/mpeg">
   </audio>
@@ -103,32 +128,17 @@
     const mensagens = [
       { tipo: "sent", texto: "Oi amor 💜" },
       { tipo: "received", texto: "Oi vida 😍 tava pensando em você" },
-      { tipo: "sent", texto: "Como foi seu dia?" },
-      { tipo: "received", texto: "Foi ótimo, mas melhorou agora falando com você 😘" },
-      { tipo: "sent", texto: "Eu amo cada segundo com você 💫" },
+      { tipo: "sent", texto: "Sabia que hoje faz 3 meses que a gente começou a namorar?" },
+      { tipo: "received", texto: "Sério? Já?? Passou tão rápido 😭" },
+      { tipo: "sent", texto: "Eu amo cada segundo ao seu lado 💫" },
       { tipo: "received", texto: "Eu também... você é o melhor presente que eu já ganhei 💜" },
-      { tipo: "sent", texto: "Queria te ver agora 😭" },
-      { tipo: "received", texto: "Eu também... saudades 💫" },
-      { tipo: "sent", texto: "Você lembra do nosso primeiro encontro?" },
-      { tipo: "received", texto: "Sim! Foi mágico 😍" },
-      { tipo: "sent", texto: "Cada momento com você é inesquecível 💜" },
-      { tipo: "received", texto: "Eu também, você é meu mundo 💫" },
-      { tipo: "sent", texto: "Tô contando os minutos pra te ver 😭" },
-      { tipo: "received", texto: "Eu também 💜" },
-      { tipo: "sent", texto: "Você me faz tão feliz 😍" },
-      { tipo: "received", texto: "E você a minha felicidade 💫" },
-      { tipo: "sent", texto: "Vamos planejar algo especial pra esse final de semana?" },
-      { tipo: "received", texto: "Sim! Já tô animada 💜" },
-      { tipo: "sent", texto: "Quero te abraçar e nunca mais soltar 😭" },
-      { tipo: "received", texto: "Eu também... seria perfeito 💫" },
-      { tipo: "sent", texto: "Você é meu porto seguro 💜" },
-      { tipo: "received", texto: "E você meu lar 💫" },
-      { tipo: "sent", texto: "Amo você hoje e sempre 😍" },
-      { tipo: "received", texto: "Eu também 💜" },
-      { tipo: "sent", texto: "Promete que nunca vamos nos separar?" },
-      { tipo: "received", texto: "Prometo 💫 pra sempre e além 💜" },
-      { tipo: "sent", texto: "Já tô com saudades 😭" },
-      { tipo: "received", texto: "Eu também 💜" }
+      { tipo: "sent", texto: "Promete ficar comigo pra sempre?" },
+      { tipo: "received", texto: "Prometo 💍 pra sempre e além 💫" },
+      { tipo: "sent", texto: "Hoje à noite vamos assistir nosso filme favorito juntos 🍿" },
+      { tipo: "received", texto: "Ai que lindo 😍 já tô ansiosa!" },
+      { tipo: "sent", texto: "Te amo demais 💜" },
+      { tipo: "received", texto: "Eu também 💖 você é meu tudo!" }
+      // Podemos adicionar mais mensagens para durar alguns minutos
     ];
 
     const chat = document.getElementById("chat");
@@ -143,9 +153,7 @@
         chat.appendChild(div);
         chat.scrollTop = chat.scrollHeight;
         index++;
-        // Intervalos variados para parecer conversa real (1.5s a 5s)
-        const delay = 1500 + Math.random() * 3500;
-        setTimeout(mostrarMensagem, delay);
+        setTimeout(mostrarMensagem, 2500);
       }
     }
 
